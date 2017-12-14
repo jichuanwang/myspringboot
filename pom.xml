@@ -3,10 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.jd.wjc</groupId>
   <artifactId>my-springboot</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>my-springboot Maven Webapp</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+    <springboot.version>1.5.9.RELEASE</springboot.version>
+  </properties>
 
   <dependencies>
 
@@ -20,11 +24,39 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>1.5.9.RELEASE</version>
+      <version>${springboot.version}</version>
     </dependency>
 
   </dependencies>
   <build>
     <finalName>my-springboot</finalName>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+
+      <!--springboot项目打可执行jar包时候的插件-->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${springboot.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>
